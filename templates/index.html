@@ -1,0 +1,191 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="Samuel Ivan">
+        <meta name="description" content="Esp8266 temperature project">
+        <meta name="keywords" content="temperature, Esp8266, Arduino, flask">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Home Weather | Project</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        
+        <script type="text/javascript">
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+            var JSON_data;
+            
+            $.getJSON('http://192.168.1.113:8888/get-data', function(data) {
+        
+                JSON_data = data.my_data
+            });
+            
+            function drawChart() {
+                var data = new google.visualization.DataTable();
+                  
+                data.addColumn('string', 'Timestamp');
+                data.addColumn('number', 'Temperature');
+                data.addRows(JSON_data.length);
+                var i;
+                for(i = 0; i < JSON_data.length; i++){
+                    data.setCell(i, 0, JSON_data[i][1]);
+                    data.setCell(i, 1, JSON_data[i][0]);
+                };
+
+                var options = {
+                  title: 'Temperature Overview',
+                  curveType: 'function',
+                  legend: { position: 'bottom' }
+                };
+
+                var chart = new google.visualization.LineChart(document.getElementById('line_chart'));
+                chart.draw(data, options);
+              }
+        </script>
+        
+        <style>
+            body{
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 15px;
+                line-height: 1.5;
+                padding: 0;
+                margin: 0;
+                background-color: dimgrey;
+                /* background-image: url(sky_backgroung.jpeg);*/
+                height: 100%;
+                width: 100%;
+            }
+            
+            header{
+                font-size: 25px;
+                color: crimson;
+                background-color: cadetblue;
+                text-align: center;
+                padding: 15px;
+            }
+            
+            h2{
+                color: chartreuse;
+            }
+            
+            a{
+                margin-right: 20px;
+                padding: 10px;
+            }
+            
+            .main{
+                margin: auto;
+                padding: 25px 100px;
+            }
+            
+            .dropdown{
+                margin: 25px 0px;
+            }
+            
+            #line_chart{
+                margin: 25px 0px;
+                width: 75%;
+                height: 500px;
+            }
+            
+            #data{
+                border: 1px none black;
+                border-collapse: collapse;
+                margin: 25px 0px;
+                width: 50%;
+            }
+            
+            #data td{
+                padding: 8px;
+                border: 1px solid #ddd;
+            }
+
+            #data tr:nth-child(even) {
+              background-color: #eee;
+            }
+
+            #data tr:nth-child(odd) {
+              background-color: #fff;
+            }
+            
+            footer{
+                font-size: 20px;
+                text-align: center;
+                padding: 10px;
+                background-color: aquamarine;
+                color: crimson;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Home Weather</h1>
+        </header>
+        <div class="container-fluid main">
+            <div>
+                <h2>Overview</h2>
+                <a class="btn btn-primary" href="http://192.168.1.113:8888/">Update</a>
+                <a class="btn btn-danger" href="http://192.168.1.113:8888/reset">Reset</a>
+                <!-- Graph -->
+                <div id="line_chart"></div>
+                <!-- Dropdown -->
+                <!--
+                <div class="dropdown">
+                  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    Time Period
+                  </button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Day</a>
+                    <a class="dropdown-item" href="#">Month</a>
+                    <a class="dropdown-item" href="#">Year</a>
+                    <a class="dropdown-item" href="#">All</a> 
+                  </div>
+                </div>
+                -->
+            </div>
+            <div>
+                <h2>Stats</h2>
+                <table id="data">
+                    <tr>
+                        <td>Device: </td>
+                        <td>{{ device }}</td>
+                    </tr>
+                    <tr>
+                        <td>Status (active): </td>
+                        <td>{{ status }}</td>
+                    </tr>
+                    <tr>
+                        <td>Location: </td>
+                        <td>Room 1</td>
+                    </tr>
+                    <tr>
+                        <td>Lowest Temperature: </td>
+                        <td>{{ lowest }}</td>
+                    </tr>
+                    <tr>
+                        <td>Highest Temperature: </td>
+                        <td>{{ highest }}</td>
+                    </tr>
+                    <tr>
+                        <td>Average Temperature: </td>
+                        <td>{{ average }}</td>
+                    </tr>
+                    <tr>
+                        <td>Current Temperature: </td>
+                        <td>{{ current }}</td>
+                    </tr>
+                    <tr>
+                        <td>Last Record: </td>
+                        <td>{{ time }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <footer>
+            <p>Created by Samuel Ivan - Copyright &copy; 2019</p>
+         </footer>
+    </body>
+</html>
