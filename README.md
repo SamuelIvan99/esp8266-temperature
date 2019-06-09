@@ -36,7 +36,7 @@ In this project I am going to show you how to set up your own temperature sensor
   #### Esp8266 and temperature sensor setup
   Watch this video - https://www.youtube.com/watch?v=YP34KloQvxE
   
-  Note: Be careful when playing with wires and check everythong twice just to be sure, because when you connect wrong pins together your temperature sensor can become very hot as a result. (Talking from my own experience)
+  Note: Be careful when playing with wires and check everything twice just to be sure, because when you connect wrong pins together your temperature sensor can become very hot as a result. (Talking from my own experience.)
   #### Arduino IDE setup
     ...
   #### MySQL database setup
@@ -78,7 +78,7 @@ In this project I am going to show you how to set up your own temperature sensor
     password='password',
     database='temperatureData')
   ```
-  3. Edit ```host``` (it can be either your domain if you have one or ae computer you will  be running server on)
+  3. Edit ```host``` (it can be either your domain if you have one or a computer you will  be running server on)
   ```
   app.run(host='localhost', port=8888, debug=True)
   ```
