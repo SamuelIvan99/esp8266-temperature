@@ -38,7 +38,21 @@ In this project I am going to show you how to set up your own temperature sensor
   
   Note: Be careful when playing with wires and check everything twice just to be sure, because when you connect wrong pins together your temperature sensor can become very hot as a result. (Talking from my own experience.)
   #### Arduino IDE setup
-    ...
+  1. Go to ```Sketch > Include Library > Manage Libraries``` and make sure you have installed the following libraries:
+  
+  Dallas Temperature, ESP8266, ESP8266HTTPClient, ESP8266WiFi, OneWire
+  
+  2. Go to ``` Tools > ``` and choose your ESP8266 module together with CPU frequency and upload speed. Usually you can also find this information at the bottom of your Esp device. 
+  
+  3. Edit ssid and password according to your home WiFi setup.
+  ```
+  const char* ssid = "...";
+  const char* password = "...";
+  ```
+  4. You can replace ```localhost``` with your own domain or computer ip address. 
+  ```
+  const char* fullServiceName = "http://localhost:8888/postjson";
+  ```
   #### MySQL database setup
   1. Open MySQL command line client.
   2. ```create database databaseName;``` (I used temperatureData)
