@@ -13,7 +13,7 @@ float celsius = -200.0;
 
 const char* ssid = "...";
 const char* password = "...";
-const char* fullServiceName = "http://192.168.1.113:8888/postjson";
+const char* fullServiceName = "http://localhost:8888/postjson";
 
 
 void setup() {
