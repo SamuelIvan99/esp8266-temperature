@@ -1,9 +1,9 @@
-<html lang="en">
+<!DOCTYPE html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="author" content="Samuel Ivan">
         <meta name="description" content="Esp8266 temperature project">
-        <meta name="keywords" content="temperature, Esp8266, Arduino, flask">
+        <meta name="keywords" content="temperature, Esp8266, Arduino, Flask">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Home Weather | Project</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -18,7 +18,7 @@
             google.charts.setOnLoadCallback(drawChart);
             var JSON_data;
             
-            $.getJSON('http://192.168.1.113:8888/get-data', function(data) {
+            $.getJSON('http://localhost:8888/get-data', function(data) {
         
                 JSON_data = data.my_data
             });
@@ -54,7 +54,6 @@
                 padding: 0;
                 margin: 0;
                 background-color: dimgrey;
-                /* background-image: url(sky_backgroung.jpeg);*/
                 height: 100%;
                 width: 100%;
             }
@@ -127,24 +126,10 @@
         <div class="container-fluid main">
             <div>
                 <h2>Overview</h2>
-                <a class="btn btn-primary" href="http://192.168.1.113:8888/">Update</a>
-                <a class="btn btn-danger" href="http://192.168.1.113:8888/reset">Reset</a>
+                <a class="btn btn-primary" href="http://localhost:8888/">Update</a>
+                <a class="btn btn-danger" href="http://localhost:8888/reset">Reset</a>
                 <!-- Graph -->
                 <div id="line_chart"></div>
-                <!-- Dropdown -->
-                <!--
-                <div class="dropdown">
-                  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                    Time Period
-                  </button>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Day</a>
-                    <a class="dropdown-item" href="#">Month</a>
-                    <a class="dropdown-item" href="#">Year</a>
-                    <a class="dropdown-item" href="#">All</a> 
-                  </div>
-                </div>
-                -->
             </div>
             <div>
                 <h2>Stats</h2>

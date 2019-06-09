@@ -8,7 +8,7 @@ wsgi_app = app.wsgi_app
 mydb = mysql.connector.connect(
     host='localhost',
     user='root',
-    password='server5720',
+    password='password',
     database='temperatureData'
 )
 
@@ -136,5 +136,5 @@ def get_tasks():
     return jsonify({'my_data': data})
 
 if __name__ == '__main__':
-    app.run(host='192.168.1.113', port=8888, debug=True)
+    app.run(host='localhost', port=8888, debug=True)
     
